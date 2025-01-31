@@ -1,8 +1,8 @@
 package com.eungchaeungcha.juang.controller;
 
-import com.eungchaeungcha.juang.dto.AuthenticationRequest;
-import com.eungchaeungcha.juang.dto.AuthenticationResponse;
-import com.eungchaeungcha.juang.dto.RegisterRequest;
+import com.eungchaeungcha.juang.dto.AuthenticationRequestDTO;
+import com.eungchaeungcha.juang.dto.AuthenticationResponseDTO;
+import com.eungchaeungcha.juang.dto.RegisterRequestDTO;
 import com.eungchaeungcha.juang.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +19,15 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request
+    public ResponseEntity<AuthenticationResponseDTO> register(
+            @RequestBody RegisterRequestDTO request
     ) {
         return ResponseEntity.ok(authenticationService.register(request));
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
+    public ResponseEntity<AuthenticationResponseDTO> authenticate(
+            @RequestBody AuthenticationRequestDTO request
     ) {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
