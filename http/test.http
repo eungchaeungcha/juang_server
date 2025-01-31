@@ -1,0 +1,3 @@
+GET http://localhost:8080/api/v1/test
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrZG1zdGo1IiwiaWF0IjoxNzM3NTEzNzk2LCJleHAiOjE3Mzc1MTUyMzZ9.r23h_kuEqUI7LJLbvuBZx6YmxIW248wmj9HD4JnaW2c
