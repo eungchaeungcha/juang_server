@@ -1,0 +1,16 @@
+services:
+  mysql_db:
+    image: mysql:8.0
+    ports:
+      - '3308:3306'
+    volumes:
+      - ./db/mysql/init:/docker-entrypoint-initdb.d
+    restart: always
+    environment:
+      MYSQL_DATABASE: juang_db
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Seoul
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake

@@ -6,4 +6,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: none
     show-sql: true
+
+jwt:
+  secret_key: "4A59AE49D9424E72199C483BA7B8B1E6E78FEEDA74261C6737272C3CF6"
