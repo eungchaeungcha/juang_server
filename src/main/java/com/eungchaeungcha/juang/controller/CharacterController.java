@@ -23,4 +23,14 @@ public class CharacterController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/{characterId}")
+    private ResponseEntity<CharacterResponseDTO> findCharacter(
+            @PathVariable Long characterId
+    ) {
+
+        CharacterResponseDTO response = characterService.find(characterId);
+
+        return ResponseEntity.ok(response);
+    }
 }
