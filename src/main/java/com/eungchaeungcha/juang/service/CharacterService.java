@@ -15,6 +15,15 @@ public class CharacterService {
     private final CharacterRepository characterRepository;
 
     @Transactional(readOnly = true)
+    public CharacterResponseDTO find(Long characterId) {
+        CharacterEntity entity = characterRepository.findOneById(characterId);
+
+        Character character = entity.toDomain();
+
+        return CharacterResponseDTO.from(character);
+    }
+
+    @Transactional(readOnly = true)
     public CharacterResponseDTO find(String name, String color) {
 
         CharacterEntity entity = characterRepository.findOneByNameAndColor(name, color);

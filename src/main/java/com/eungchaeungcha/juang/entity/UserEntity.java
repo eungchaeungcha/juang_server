@@ -5,6 +5,7 @@ import com.eungchaeungcha.juang.domain.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "user")
+@Getter
 public class UserEntity extends BaseEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,17 +48,25 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     public static UserEntity fromDomain(User user) {
         return UserEntity.builder()
-                .username(user.username())
-                .password(user.password())
-                .nickName(user.nickName())
-                .familyId(user.familyId())
-                .characterId(user.characterId())
-                .role(user.role())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .nickName(user.getNickName())
+                .familyId(user.getFamilyId())
+                .characterId(user.getCharacterId())
+                .role(user.getRole())
                 .build();
     }
 
     public void setCharacterId(Long characterId) {
         this.characterId = characterId;
+    }
+
+    public void setFamilyId(Long familyId) {
+        this.familyId = familyId;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     @Override

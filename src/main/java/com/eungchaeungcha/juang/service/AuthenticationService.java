@@ -1,5 +1,6 @@
 package com.eungchaeungcha.juang.service;
 
+import com.eungchaeungcha.juang.common.CommonErrorCode;
 import com.eungchaeungcha.juang.config.JwtService;
 import com.eungchaeungcha.juang.domain.Role;
 import com.eungchaeungcha.juang.entity.UserEntity;
@@ -23,6 +24,12 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponseDTO register(RegisterRequestDTO request) {
+
+        if(checkUsernameDuplicate(request.username())){
+            throw new RuntimeException(CommonErrorCode.ALREADY_EXISTS_USERNAME.name());
+        }
+
+        userRepository.findByUsername(request.username());
         var user = UserEntity.builder()
                 .username(request.username())
                 .password(passwordEncoder.encode(request.password()))
@@ -53,6 +60,10 @@ public class AuthenticationService {
         return AuthenticationResponseDTO.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    private boolean checkUsernameDuplicate(String username) {
+        return userRepository.existsByUsername(username);
     }
 
 }
