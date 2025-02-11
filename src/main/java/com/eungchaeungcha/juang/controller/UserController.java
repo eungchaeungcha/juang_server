@@ -24,6 +24,21 @@ public class UserController {
             @AuthenticationPrincipal UserDetails userDetails,
             @PathVariable Long characterId
     ) {
+        String username = userDetails.getUsername();
+
+        UserResponseDTO response = userService.updateCharacter(username, characterId);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/nick-name")
+    private ResponseEntity<UserResponseDTO> updateNickName(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody UserUpdateNickNameRequestDTO request
+    ) {
+        String username = userDetails.getUsername();
+
+        UserResponseDTO response = userService.updateNickName(username, request.nickName());
 
         return ResponseEntity.ok(response);
     }
