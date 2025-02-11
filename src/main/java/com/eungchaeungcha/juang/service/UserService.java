@@ -31,7 +31,19 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponseDTO updateCharacter(Long userId, Long characterId) {
+    public UserResponseDTO updateNickName(String username, String nickName) {
+        UserEntity userEntity = find(username);
+
+        User user = userEntity.toDomain();
+        user.changeNickName(nickName);
+
+        userEntity.setNickName(user.getNickName());
+
+        return UserResponseDTO.from(userEntity.toDomain());
+    }
+
+    @Transactional
+    public UserResponseDTO updateFamily(String username, String code) {
 
         UserEntity userEntity = find(username);
         User user = userEntity.toDomain();
