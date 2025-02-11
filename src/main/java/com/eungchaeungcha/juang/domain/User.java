@@ -1,19 +1,32 @@
 package com.eungchaeungcha.juang.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public record User(Long id, String username, String password, String nickName, Long familyId, Long characterId,
-                   Role role) {
-    public User changeCharacter(Long newCharacterId) {
-        return User.builder()
-                .id(this.id)
-                .username(this.username)
-                .password(this.password)
-                .nickName(this.nickName)
-                .familyId(this.familyId)
-                .characterId(newCharacterId)
-                .role(this.role)
-                .build();
+public class User {
+    private Long id;
+    private String username;
+    private String password;
+    private String nickName;
+    private Long familyId;
+    private Long characterId;
+    private Role role;
+
+    public void changeCharacter(Long characterId) {
+        this.characterId = characterId;
+    }
+
+    public void changeFamily(Long familyId) {
+        this.familyId =familyId;
+    }
+
+    public void changeNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

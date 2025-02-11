@@ -16,12 +16,20 @@ public class UserService {
     @Transactional
     public UserResponseDTO updateCharacter(Long userId, Long characterId) {
 
-        UserEntity entity = userRepository.findOneById(userId);
+        UserEntity userEntity = find(username);
+        User user = userEntity.toDomain();
 
-        User updatedUser = entity.toDomain().changeCharacter(characterId);
+        Family family = familyService.find(code);
 
-        entity.setCharacterId(updatedUser.characterId());
+        user.changeFamily(family.getId());
 
-        return UserResponseDTO.from(updatedUser);
+        userEntity.setFamilyId(user.getFamilyId());
+
+        return UserResponseDTO.from(userEntity.toDomain());
+    }
+
+    public UserEntity find(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException(CommonErrorCode.USER_NOT_FOUND.name()));
     }
 }
