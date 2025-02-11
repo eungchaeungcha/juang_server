@@ -19,9 +19,9 @@ public class UserController {
 
     private final UserService userService;
 
-    @PatchMapping("/{userId}/characters/{characterId}")
+    @PatchMapping("/characters/{characterId}")
     private ResponseEntity<UserResponseDTO> updateCharacter(
-            @PathVariable Long userId,
+            @AuthenticationPrincipal UserDetails userDetails,
             @PathVariable Long characterId
     ) {
 
