@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: 'aws-parameterstore:'
   datasource:
     url: ${DATABASE_URL}
     username: ${DATABASE_USERNAME}
@@ -9,6 +11,14 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+  cloud:
+    aws:
+      parameterstore:
+        enabled: true
+        prefix: /server
+        name: cloud-parameter-store
+        profileSeparator: "_"
+
 
 jwt:
   secret_key: ${JWT_SECRET_KEY}
