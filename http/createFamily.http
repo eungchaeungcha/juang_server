@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/v1/families
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwic3ViIjoia2Rtc3RqNSIsImlhdCI6MTczOTI1MzQ4NSwiZXhwIjoxNzM5MjU0OTI1fQ.nYrsgQp2gEbZvdsl0b8SVjINrb08x3lAojrCyqlnhTM
+
+{
+  "name": "family1"
+}
