@@ -2,14 +2,17 @@ package com.eungchaeungcha.juang.dto;
 
 
 import com.eungchaeungcha.juang.domain.User;
+import lombok.Builder;
 
-public record UserResponseDTO(Long id, String username, String nickName, Long characterId) {
+@Builder
+public record UserResponseDTO(Long id, String username, String nickName, Long characterId, Long familyId) {
     public static UserResponseDTO from(User user) {
-        return new UserResponseDTO(
-                user.id(),
-                user.username(),
-                user.nickName(),
-                user.characterId()
-        );
+        return UserResponseDTO.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .nickName(user.getNickName())
+                .characterId(user.getCharacterId())
+                .familyId(user.getFamilyId())
+                .build();
     }
 }
