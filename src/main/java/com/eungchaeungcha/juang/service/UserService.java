@@ -1,5 +1,7 @@
 package com.eungchaeungcha.juang.service;
 
+import com.eungchaeungcha.juang.common.CommonErrorCode;
+import com.eungchaeungcha.juang.domain.Family;
 import com.eungchaeungcha.juang.domain.User;
 import com.eungchaeungcha.juang.dto.UserResponseDTO;
 import com.eungchaeungcha.juang.entity.UserEntity;
@@ -11,7 +13,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepository userRepository;
+    private final FamilyService familyService;
+
+    @Transactional
+    public UserResponseDTO updateCharacter(String username, Long characterId) {
+
+        UserEntity userEntity = find(username);
+
+        User user = userEntity.toDomain();
+        user.changeCharacter(characterId);
+
+        userEntity.setCharacterId(user.getCharacterId());
+
+        return UserResponseDTO.from(userEntity.toDomain());
+    }
 
     @Transactional
     public UserResponseDTO updateCharacter(Long userId, Long characterId) {
