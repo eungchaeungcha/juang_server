@@ -3,6 +3,11 @@ package com.eungchaeungcha.juang.domain;
 import lombok.*;
 
 @Builder
-public record Character(Long id, String name, String color, String link) {
+@Getter
+public class Character{
+    private Long id;
+    private String name;
+    private String color;
+    private String link;
 }
 

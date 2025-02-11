@@ -10,10 +10,10 @@ public record CharacterResponseDTO(
 ) {
     public static CharacterResponseDTO from(Character character) {
         return new CharacterResponseDTO(
-                character.id(),
-                character.name(),
-                character.color(),
-                character.link()
+                character.getId(),
+                character.getName(),
+                character.getColor(),
+                character.getLink()
         );
     }
 }
