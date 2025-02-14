@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class JwtService {
 
-    @Value("${jwt.secret_key}")
+    @Value("${jwt.secret-key}")
     private String SECRET_KEY;
 
     public String extractUsername(String token) {
