@@ -1,10 +1,8 @@
 spring:
-  config:
-    import: aws-parameterstore
   datasource:
-    url: ${spring.datasource.url}  # AWS Parameter Store에서 직접 가져옴
-    username: ${spring.datasource.username}
-    password: ${spring.datasource.password}
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -12,17 +10,5 @@ spring:
       ddl-auto: none
     show-sql: true
 
-aws:
-  paramstore:
-    enabled: true
-    prefix: /server
-    name: juang
-    profileSeparator: _
-
 jwt:
-  secret_key: ${jwt.secret-key}  # AWS Parameter Store에서 직접 가져오기
-
-logging:
-  level:
-    io.awspring.cloud: DEBUG
-    com.amazonaws: DEBUG
+  secret-key: ${JWT_SECRET_KEY}
