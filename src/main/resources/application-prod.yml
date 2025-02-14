@@ -1,9 +1,8 @@
-config:
-  type: aws-parameterstore:/server/cloud-parameter-store
-
 spring:
+  application:
+    name: juang
   config:
-    import: ${config.type}
+    import: bootstrap.yml
   datasource:
     url: ${DATABASE_URL}
     username: ${DATABASE_USERNAME}
