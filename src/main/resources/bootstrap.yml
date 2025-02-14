@@ -1,6 +1,0 @@
-aws:
-  paramstore:
-    enabled: true
-    prefix: /server
-    name: juang
-    profileSeparator: _
