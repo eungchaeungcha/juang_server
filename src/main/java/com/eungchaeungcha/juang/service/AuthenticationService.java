@@ -36,7 +36,7 @@ public class AuthenticationService {
     public AuthenticationResponseDTO register(RegisterRequestDTO request) {
 
         if(checkUsernameDuplicate(request.username())){
-            throw new RuntimeException(CommonErrorCode.ALREADY_EXISTS_USERNAME.name());
+            throw new BusinessException(CommonErrorCode.ALREADY_EXISTS_USERNAME);
         }
 
         userRepository.findByUsername(request.username());
