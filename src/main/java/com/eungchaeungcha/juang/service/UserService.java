@@ -7,6 +7,7 @@ import com.eungchaeungcha.juang.dto.UserResponseDTO;
 import com.eungchaeungcha.juang.entity.UserEntity;
 import com.eungchaeungcha.juang.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +54,13 @@ public class UserService {
         user.changeFamily(family.getId());
 
         userEntity.setFamilyId(user.getFamilyId());
+
+        return UserResponseDTO.from(userEntity.toDomain());
+    }
+
+    public UserResponseDTO findCurrentUser(UserDetails userDetails) {
+
+        UserEntity userEntity = find(userDetails.getUsername());
 
         return UserResponseDTO.from(userEntity.toDomain());
     }

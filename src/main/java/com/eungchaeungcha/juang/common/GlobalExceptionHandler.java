@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -28,6 +29,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(errorCode.getHttpStatus())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(makeErrorResponse(e, errorCode));
+    }
+    @ExceptionHandler
+    public ResponseEntity<Object> handleBusinessLogicException(BusinessException e) {
+
+        ErrorCode errorCode = e.getErrorCode();
+
+        return ResponseEntity.status(errorCode.getHttpStatus())
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(makeErrorResponse(errorCode));
+    }
+
+
+    private ErrorResponse makeErrorResponse(ErrorCode errorCode) {
+        return ErrorResponse.builder()
+                .code(errorCode.name())
+                .message(errorCode.getMessage())
+                .build();
     }
 
     private ErrorResponse makeErrorResponse(BindException e, ErrorCode errorCode) {
