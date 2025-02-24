@@ -37,7 +37,7 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> userRepository.findByUsername(username)
-                .orElseThrow(() -> new BadCredentialsException("invalid username"));
+                .orElseThrow(() -> new BadCredentialsException("Invalid username"));
     }
 
     @Bean
