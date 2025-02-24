@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum CommonErrorCode implements ErrorCode {
 
+    INVALID_USERNAME_AND_PASSWORD(HttpStatus.UNAUTHORIZED, "Invalid username and password"),
     INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "Invalid parameter included"),
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "User not found"),
     FAMILY_NOT_FOUND(HttpStatus.NOT_FOUND, "Family not found"),
