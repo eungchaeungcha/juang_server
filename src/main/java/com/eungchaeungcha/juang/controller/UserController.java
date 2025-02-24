@@ -19,6 +19,15 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/me")
+    private ResponseEntity<UserResponseDTO> get(
+            @AuthenticationPrincipal UserDetails userDetails
+    ) {
+        UserResponseDTO response = userService.findCurrentUser(userDetails);
+
+        return ResponseEntity.ok(response);
+    }
+
     @PatchMapping("/characters/{characterId}")
     private ResponseEntity<UserResponseDTO> updateCharacter(
             @AuthenticationPrincipal UserDetails userDetails,
