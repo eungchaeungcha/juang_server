@@ -1,5 +1,7 @@
 package com.eungchaeungcha.juang.service;
 
+import com.eungchaeungcha.juang.common.BusinessException;
+import com.eungchaeungcha.juang.common.CommonErrorCode;
 import com.eungchaeungcha.juang.domain.Character;
 import com.eungchaeungcha.juang.dto.CharacterResponseDTO;
 import com.eungchaeungcha.juang.entity.CharacterEntity;
@@ -16,7 +18,8 @@ public class CharacterService {
 
     @Transactional(readOnly = true)
     public CharacterResponseDTO find(Long characterId) {
-        CharacterEntity entity = characterRepository.findOneById(characterId);
+        CharacterEntity entity = characterRepository.findOneById(characterId)
+                .orElseThrow(() -> new BusinessException(CommonErrorCode.CHARACTER_NOT_FOUND));
 
         Character character = entity.toDomain();
 
@@ -26,7 +29,8 @@ public class CharacterService {
     @Transactional(readOnly = true)
     public CharacterResponseDTO find(String name, String color) {
 
-        CharacterEntity entity = characterRepository.findOneByNameAndColor(name, color);
+        CharacterEntity entity = characterRepository.findOneByNameAndColor(name, color)
+                .orElseThrow(() -> new BusinessException(CommonErrorCode.CHARACTER_NOT_FOUND));
 
         Character character = entity.toDomain();
 
