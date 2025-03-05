@@ -11,6 +11,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -62,5 +64,16 @@ public class UserController {
         UserResponseDTO response = userService.updateFamily(username, request.code());
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/families/{familyId}")
+    private ResponseEntity<List<UserResponseDTO>> get(
+            @PathVariable Long familyId
+    ) {
+
+        List<UserResponseDTO> response = userService.find(familyId);
+
+        return ResponseEntity.ok(response);
+
     }
 }
