@@ -1,5 +1,6 @@
 package com.eungchaeungcha.juang.service;
 
+import com.eungchaeungcha.juang.common.BusinessException;
 import com.eungchaeungcha.juang.common.CommonErrorCode;
 import com.eungchaeungcha.juang.domain.Family;
 import com.eungchaeungcha.juang.domain.User;
@@ -10,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -68,5 +72,19 @@ public class UserService {
     public UserEntity find(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException(CommonErrorCode.USER_NOT_FOUND.name()));
+    }
+
+    public List<UserResponseDTO> find(Long familyId) {
+        familyService.exist(familyId);
+
+        List<UserEntity> userList = userRepository.findAllByFamilyId(familyId);
+
+        if (userList.isEmpty()) {
+            throw new BusinessException(CommonErrorCode.USER_NOT_FOUND);
+        }
+
+        return userList
+                .stream().map(userEntity -> UserResponseDTO.from(userEntity.toDomain()))
+                .collect(Collectors.toList());
     }
 }

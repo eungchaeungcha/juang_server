@@ -1,5 +1,6 @@
 package com.eungchaeungcha.juang.service;
 
+import com.eungchaeungcha.juang.common.BusinessException;
 import com.eungchaeungcha.juang.common.CommonErrorCode;
 import com.eungchaeungcha.juang.domain.Family;
 import com.eungchaeungcha.juang.dto.FamilyRequestDTO;
@@ -38,6 +39,12 @@ public class FamilyService {
                 .orElseThrow(() -> new RuntimeException(CommonErrorCode.FAMILY_NOT_FOUND.name()));
 
         return familyEntity.toDomain();
+    }
+
+    public void exist(Long familyId) {
+        if(!familyRepository.existsById(familyId)){
+            throw new BusinessException(CommonErrorCode.FAMILY_NOT_FOUND);
+        }
     }
 
     private String generateUniqueCode() {
