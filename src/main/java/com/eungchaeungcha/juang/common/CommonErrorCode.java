@@ -13,7 +13,9 @@ public enum CommonErrorCode implements ErrorCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "User not found"),
     FAMILY_NOT_FOUND(HttpStatus.NOT_FOUND, "Family not found"),
     ALREADY_EXISTS_USERNAME(HttpStatus.BAD_REQUEST, "Already username exists"),
-    CHARACTER_NOT_FOUND(HttpStatus.NOT_FOUND, "Character not found");
+    CHARACTER_NOT_FOUND(HttpStatus.NOT_FOUND, "Character not found"),
+    FAMILY_QUESTION_NOT_FOUND(HttpStatus.NOT_FOUND, "Family question not found"),
+    QUESTION_NOT_FOUND(HttpStatus.NOT_FOUND, "Question not found");
 
 
     private final HttpStatus httpStatus;
